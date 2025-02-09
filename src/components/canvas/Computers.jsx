@@ -43,6 +43,18 @@ const ComputersCanvas = () => {
     const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
     };
+    // Handle WebGL context lost
+canvas.addEventListener('webglcontextlost', (event) => {
+  event.preventDefault(); // Prevent default behavior (error message)
+  console.log("WebGL context lost. Trying to recover...");
+  // You might need to pause or reload your scene when the context is lost
+}, false);
+
+// Handle WebGL context restored
+canvas.addEventListener('webglcontextrestored', () => {
+  console.log("WebGL context restored. Continuing...");
+  // Reinitialize your scene or renderer here if necessary
+}, false);
 
     // Add the callback function as a listener for changes to the media query
     mediaQuery.addEventListener("change", handleMediaQueryChange);
